@@ -37,8 +37,6 @@ A high-performance task management API built with FastAPI and SQLAlchemy Core, d
 
 ## ⚙️ Environment Variables
     
-    From project root run:
-
     ```bash
     source .env
     ```
