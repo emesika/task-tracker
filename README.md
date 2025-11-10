@@ -40,6 +40,8 @@ A high-performance task management API built with FastAPI and SQLAlchemy Core, d
     ```bash
     source .env
     ```
+-----
+
 > **Note:** For the benchmark script, DB_HOST should be `localhost`.
 
 -----
