@@ -1,10 +1,9 @@
-# main.py
 from contextlib import asynccontextmanager
 
 from fastapi import FastAPI
 
 from .database import engine, metadata
-from .tasks_router import router as tasks_router
+from .tasks_router import tasks_router
 
 
 @asynccontextmanager

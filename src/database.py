@@ -1,4 +1,3 @@
-# database.py
 from typing import AsyncGenerator
 
 from pydantic_settings import BaseSettings

@@ -1,4 +1,3 @@
-# tasks_router.py
 from typing import Optional
 
 from fastapi import APIRouter, Depends, HTTPException, Response
@@ -8,7 +7,7 @@ from sqlalchemy.ext.asyncio import AsyncConnection
 from .database import tasks_table, get_connection
 from .pydantic_models import Task, TaskCreate, TaskUpdate
 
-router = APIRouter(
+tasks_router = APIRouter(
     prefix="/tasks",
     tags=["Tasks"],
     responses={404: {"description": "Task not found"}},
@@ -30,7 +29,7 @@ async def get_task_by_id(conn: AsyncConnection, task_id: int) -> Optional[Task]:
 
 # ---------- Routes ----------
 
-@router.post("/", response_model=Task, status_code=201)
+@tasks_router.post("/", response_model=Task, status_code=201)
 async def create_task(task: TaskCreate, conn: AsyncConnection = Depends(get_connection)) -> Task:
     """
     Create a new task and return the created row.
@@ -47,7 +46,7 @@ async def create_task(task: TaskCreate, conn: AsyncConnection = Depends(get_conn
     return Task.model_validate(row)
 
 
-@router.get("/", response_model=list[Task])
+@tasks_router.get("/", response_model=list[Task])
 async def read_tasks(
     skip: int = 0,
     limit: int = 10,
@@ -67,7 +66,7 @@ async def read_tasks(
     return [Task.model_validate(row) for row in rows]
 
 
-@router.get("/{task_id}", response_model=Task)
+@tasks_router.get("/{task_id}", response_model=Task)
 async def read_task(task_id: int, conn: AsyncConnection = Depends(get_connection)) -> Task:
     """
     Retrieve a single task by its ID.
@@ -78,7 +77,7 @@ async def read_task(task_id: int, conn: AsyncConnection = Depends(get_connection
     return task
 
 
-@router.put("/{task_id}", response_model=Task)
+@tasks_router.put("/{task_id}", response_model=Task)
 async def update_task(
     task_id: int,
     payload: TaskUpdate,
@@ -109,7 +108,7 @@ async def update_task(
     return Task.model_validate(row)
 
 
-@router.delete("/{task_id}", status_code=204)
+@tasks_router.delete("/{task_id}", status_code=204)
 async def delete_task(task_id: int, conn: AsyncConnection = Depends(get_connection)) -> Response:
     """
     Delete a task by its ID.
