@@ -135,7 +135,7 @@ This file defines the data shapes for API validation and serialization.
       * **`Task`**: Extends `TaskBase` with `id` and `completed` fields; used as the response model.
       * Uses `ConfigDict(from_attributes=True)` (Pydantic v2) to allow models to be created from database row attributes (replaces `orm_mode`).
 
-### `routers/tasks.py` - Task API Endpoints
+### `tasks_router.py` - Task API Endpoints
 
 This file defines all the CRUD (Create, Read, Update, Delete) API endpoints for task management.
 
@@ -154,6 +154,6 @@ This file defines all the CRUD (Create, Read, Update, Delete) API endpoints for 
 > This project follows a common FastAPI structure to ensure scalability and separation of concerns:
 >
 >   * `main.py` is kept minimal, acting as the app assembler.
->   * Business logic for different resources (e.g., "tasks") is split into modules within a `routers/` package.
+>   * Business logic for different resources (e.g., "tasks") is split into modules within a `tasks_router.py`.
 >   * Database setup is encapsulated in `database.py`.
 >   * Data schemas are centralized in `pydantic_models.py`.
